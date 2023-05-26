@@ -1,0 +1,62 @@
+{# templates/lucky/number.html.twig #}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 5px 10px;
+    }
+</style>
+
+<h1>Blog</h1>
+
+<form action="/api/blogs" method="get">
+    <label>
+        <input type="text" placeholder="Author" name="author" value="{{ author }}" maxlength="50">
+    </label>
+    <label>
+        <input type="text" placeholder="Summary" name="summary" value="{{ summary }}" maxlength="100">
+    </label>
+    {# <button type="reset">Reset</button> #}
+    <button type="submit">Submit</button>
+</form>
+
+<table>
+    <tr>
+        <th>Author</th>
+        <th>Summary</th>
+        <th>Image</th>
+        <th>Content</th>
+        <th>Published At</th>
+        {# <th>Action</th> #}
+    </tr>
+
+    {% if result %}
+        {% for item in result %}
+            <tr>
+                <td>{{ item.author }}</td>
+                <td>{{ item.summary }}</td>
+                <td><img style="width: 200px" src="http://127.0.0.1:8080/images/{{ item.image }}"
+                         alt="{{ item.image }}">
+                </td>
+                <td>{{ item.content }}</td>
+                <td>{{ item.updatedAt }}</td>
+                {# <td> #}
+                {# <button>Edit</button> #}
+                {# <button>Delete</button> #}
+                {# </td> #}
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="6" style="text-align: center">No Data</td>
+        </tr>
+    {% endif %}
+
+</table>
