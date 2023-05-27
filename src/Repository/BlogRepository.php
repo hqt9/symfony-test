@@ -49,6 +49,8 @@ class BlogRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('b')
             ->orderBy('b.updated_at', 'DESC')
+            ->addOrderBy('b.id', 'DESC')
+            ->andWhere('b.status = 1')
             ->setMaxResults(null);
 
         if (!empty($param['author']))
